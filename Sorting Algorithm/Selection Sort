@@ -1,0 +1,33 @@
+import java.util.Arrays;
+public class Solution {
+  
+	public static int findMin(int[] array){
+		if (array == null || array.length==0) {
+			return -1;
+		}
+		int loc = 0;
+		int min = array[0];
+		for(int i = 1; i<array.length;i++) {
+		   if(array[i]<min) {
+			   min = array[i];
+			   loc = i;
+		   }
+		}
+		return loc;
+	} 
+  
+  public int[] solve(int[] array) {
+    // Write your solution here
+    int H;
+		int temp;
+		for (int i=0; i<array.length ;i++) {
+		    H = findMin(Arrays.copyOfRange(array,i,array.length));
+		    if (H>=0) {
+		       temp = array[H+i];
+		       array[i+H] = array[i];
+		       array[i] = temp;
+		    }
+		}
+    return array;
+  }
+}

@@ -1,0 +1,23 @@
+public class Solution {
+  public int[] sort(int[] array) {
+    // Write your solution here
+    int i;
+    int j;
+    int temp;
+    if (array.length == 0 && array == null){
+      return array;
+    }
+    for (i=1;i<array.length;i++){
+      for(j=i-1;j>=0;j--){
+         if(array[j+1]<array[j]){
+           temp = array[j+1];
+           array[j+1] = array[j];
+           array[j] = temp;
+         }else{
+           break;
+         }
+      }
+    }
+    return array;
+  }
+}

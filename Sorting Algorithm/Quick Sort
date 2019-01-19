@@ -1,0 +1,33 @@
+public class Solution {
+  	public static int findmiddle(int L,int H,int[] array) {
+	  int middle;
+	  middle = array[L];
+      while(L<H) {
+    	  while (L<H && array[H]>=middle) {
+    		  H--;
+    	  }
+    	  array[L] = array[H];
+    	  while (L<H && array[L]<middle) {
+    		  L++;
+    	  }    	  
+    	  array[H] = array[L];
+      }
+      array[L] = middle;
+      return L;
+	}
+	
+	public static void quick(int L,int H,int[] array) {
+		int Middle;
+		if (L<H) {
+			Middle = findmiddle(L,H,array);
+			quick(L,Middle-1,array);
+			quick(Middle+1,H,array);
+		}
+	}
+  public int[] quickSort(int[] array) {
+    // Write your solution here
+    quick(0,array.length-1,array);
+    return array;
+    
+  }
+}

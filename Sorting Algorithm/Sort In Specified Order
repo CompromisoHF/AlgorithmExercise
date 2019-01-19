@@ -1,0 +1,47 @@
+public class Solution {
+  
+  	public static int findmiddle(int L,int H,int[] array) {
+	  int middle;
+	  middle = array[L];
+      while(L<H) {
+    	  while (L<H && array[H]>=middle) {
+    		  H--;
+    	  }
+    	  array[L] = array[H];
+    	  while (L<H && array[L]<middle) {
+    		  L++;
+    	  }    	  
+    	  array[H] = array[L];
+      }
+      array[L] = middle;
+      return L;
+	}
+	
+	public static void quickSort(int L,int H,int[] array) {
+		int Middle;
+		if (L<H) {
+			Middle = findmiddle(L,H,array);
+			quickSort(L,Middle-1,array);
+			quickSort(Middle+1,H,array);
+		}
+	}
+  
+  public int[] sortSpecial(int[] A1, int[] A2) {
+    // Write your solution here
+    int i,j;
+    for(i=0;i<A2.length;i++){
+       for(j=0;j<A1.length;j++){
+          if(A1[j] == A2[i]){
+            A1[j] = - A2.length + i;
+          }
+       }
+    }
+    quickSort(0,A1.length-1,A1);
+    for(i=0;i<A1.length;i++){
+      if(A1[i]<0){
+        A1[i]=A2[A1[i]+A2.length];
+      }
+    }
+    return A1;
+  }
+}

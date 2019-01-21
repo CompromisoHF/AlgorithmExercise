@@ -1,0 +1,28 @@
+public class Solution {
+  public int longest(int[] array) {
+    // Write your solution here
+    if (array==null || array.length==0){
+      return 0;
+    }
+    
+    int[] dp = new int[array.length];
+    int max = 1;
+    int i,j;
+    
+    dp[0] = 1;
+    
+    for(i = 1;i<array.length;i++){
+       dp[i] = 1;
+       for(j = 0;j < i;j++){
+         if (array[j]<array[i] && dp[j]>= dp[i]){
+            dp[i] = dp[j]+1;
+         }
+       }
+       if (max<dp[i]){
+          max = dp[i];
+       }
+    }
+    
+    return max;
+  }
+}

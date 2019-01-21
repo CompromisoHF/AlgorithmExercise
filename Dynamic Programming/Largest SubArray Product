@@ -1,0 +1,26 @@
+public class Solution {
+  public double largestProduct(double[] array) {
+    // Write your solution here
+    if (array == null || array.length == 0){
+       return 0;
+    }
+    
+    int i,j,k;
+    double product = 1.0;
+    double[] dp = new double[array.length];
+    dp[0] = array[0];
+    
+    for(i = 1;i<array.length;i++){
+      dp[i] = dp[i-1];
+      product = 1;
+      for(j = i;j>=0;j--){
+          product = product*array[j];
+          if (product > dp[i]){
+             dp[i] = product;
+          }
+      }
+    }
+    
+    return dp[array.length-1];
+  }
+}

@@ -1,0 +1,24 @@
+public class Solution {
+  public int largestSum(int[] array) {
+    // Write your solution here
+    if (array==null || array.length==0){
+      return 0;
+    }
+    
+    int[] dp = new int[array.length];
+    int i,j,k,sum;
+    
+    dp[0] = array[0];
+    for(j = 1;j<array.length;j++){
+       dp[j] = dp[j-1];
+       sum = 0;
+       for(i = j;i >=0 ;i--){
+         sum = sum + array[i];
+         if (sum > dp[j]){
+           dp[j] = sum;
+         }
+       }
+    }
+   return dp[array.length-1];
+  }
+}

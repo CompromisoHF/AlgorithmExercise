@@ -1,0 +1,24 @@
+public class Solution {
+  public boolean canJump(int[] array) {
+    // Write your solution here
+    
+    int[] arrive =new int[array.length];
+    int i,j,k;
+    arrive[0] = 1;
+    for (i=0;i<array.length;i++){
+      if (arrive[i] != 1){
+         continue;
+      }
+      for (j = i;j<=i+array[i] && j<array.length;j++){
+        arrive[j] = 1;
+      }
+    }
+    
+    if (arrive[array.length-1]==1){
+       return true;
+    }else{
+       return false;
+    }
+    
+  }
+}

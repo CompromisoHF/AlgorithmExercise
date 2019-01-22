@@ -1,0 +1,37 @@
+import java.util.ArrayList;
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        
+        int[] dx = {1,0,-1,0};
+        int[] dy = {0,1,0,-1};
+        int i,j,k,p=0,x=0,y=0,nextx,nexty;
+        int Colsize = matrix[0].length;
+        int Rowsize = matrix.length;
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        int[][] marker = new int[Rowsize+2][Colsize+2];
+        //build wall
+        for (i = 0; i<Rowsize+2 ;i++){
+            marker[i][0] = 1;
+            marker[i][Colsize+1] = 1;
+        }        
+        for (i = 0; i<Colsize+2 ;i++){
+            marker[0][i] = 1;
+            marker[Rowsize+1][i] = 1;
+        }           
+        //search
+        for (k=1; k<=Colsize*Rowsize; k++){
+            ans.add(matrix[y][x]);
+            marker[y+1][x+1]=1;
+            nextx = x+dx[p];  
+            nexty = y+dy[p];
+            if (marker[nexty+1][nextx+1]==1){
+                p = (p+1) % 4;
+            }
+            x = x+dx[p];
+            y = y+dy[p];
+        }
+        
+        return ans;
+        
+    }
+}

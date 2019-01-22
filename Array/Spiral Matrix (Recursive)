@@ -1,0 +1,50 @@
+class Solution {
+   
+  //  ArrayList<Integer> newans = new ArrayList<Integer>();
+
+    public static int[][] rotate(int[][] a){
+        if (a == null || a.length == 0){
+            return null;
+        }
+        int i,j;
+        int[][] result = new int[a[0].length][a.length];
+        for (i=0;i<a.length;i++){
+            for (j=0;j<a[0].length;j++){
+                result[a[0].length-1-j][i] = a[i][j];
+            }
+        }
+        return result;
+    }
+    
+    public List<Integer> spiralOrder(int[][] matrix) {
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        if (matrix == null || matrix.length == 0) {
+            return ans;            
+        }
+
+    
+        
+        int[][] Next = new int[matrix.length-1][matrix[0].length];
+        int i;
+
+        
+        for(i=0;i<matrix[0].length;i++){   
+          ans.add(matrix[0][i]);
+
+       //   System.out.print(matrix[0][i]+",");
+        } 
+      //   System.out.println();
+        
+        for (i=1;i<matrix.length;i++){
+           System.arraycopy(matrix[i],0,Next[i-1],0,matrix[0].length); 
+        }
+
+       List<Integer> newans = spiralOrder(rotate(Next));
+       if (newans != null){
+           ans.addAll(newans);
+       }
+        
+       return ans;       
+        
+    }
+}

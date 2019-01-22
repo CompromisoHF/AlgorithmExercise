@@ -1,13 +1,16 @@
-import java.util.ArrayList;
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
+        ArrayList<Integer> ans = new ArrayList<Integer>();       
+        if (matrix == null || matrix.length ==0){
+            return ans;
+        }
         
         int[] dx = {1,0,-1,0};
         int[] dy = {0,1,0,-1};
         int i,j,k,p=0,x=0,y=0,nextx,nexty;
         int Colsize = matrix[0].length;
         int Rowsize = matrix.length;
-        ArrayList<Integer> ans = new ArrayList<Integer>();
+
         int[][] marker = new int[Rowsize+2][Colsize+2];
         //build wall
         for (i = 0; i<Rowsize+2 ;i++){
@@ -32,6 +35,5 @@ class Solution {
         }
         
         return ans;
-        
     }
 }

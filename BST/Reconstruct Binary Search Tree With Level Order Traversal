@@ -1,0 +1,56 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+  int k;
+ 
+  TreeNode build(TreeNode Root,int[] level,int min,int max){
+    int temp;
+    if (k >= level.length){
+       return Root;
+    } else{
+      if (level[k]<min || level[k]>max)
+         return Root;
+      else if ( Root == null ) {
+         
+         TreeNode root = new TreeNode(level[k]);
+         k++;
+         
+         while (true){
+           temp = k;
+           root.left = build (root.left,level,min,root.key);
+           root.right = build (root.right,level,root.key,max);     
+           if (k==temp) break;
+         }  
+         return root;
+      }else{
+         while (true){
+           temp = k;
+           Root.left = build (Root.left,level,min,Root.key);
+           Root.right = build (Root.right,level,Root.key,max);     
+           if (k==temp) break;
+         }  
+         return Root;
+      }
+    }
+  }
+  
+  public TreeNode reconstruct(int[] level) {
+    // Write your solution here
+    if (level.length == 0 || level==null){
+      return null;
+    }
+    k = 0;
+    TreeNode root = null;
+    root = build(root,level,Integer.MIN_VALUE,Integer.MAX_VALUE);
+    return root;
+    
+  }
+}

@@ -1,0 +1,110 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+    static public TreeNode deleteTree(TreeNode root, int key) {
+    // Write your solution here
+    TreeNode p = new TreeNode(0);
+    TreeNode q = new TreeNode(0);    
+    
+    if (root == null) {
+       return null;
+    }
+    
+    if (root.key > key){
+      root.left = deleteTree(root.left,key);
+      return root;
+    }
+    if (root.key < key){
+      root.right = deleteTree(root.right,key);
+      return root;
+    }    
+    
+    if (root.left == null){
+      root = root.right;
+      return root;
+    }    
+    
+    if (root.right == null){
+      root = root.left;
+      return root;
+    }
+    
+    p = root.right;
+    
+    if (p.left==null){
+      p.left = root.left;
+      root = p;
+      return root;
+    }
+    
+    while (p.left.left != null){
+       p = p.left;
+    }    
+    q = p.left;
+    p.left = p.left.right; 
+    q.right = root.right;
+    q.left = root.left;
+    root = q;
+    return root;
+  }
+   
+  
+   static public int closest(TreeNode root, double target) {
+    int ans;
+    // Write your solution here
+//    if (root == null) {
+//       return Integer.MAX_VALUE;
+//    }
+    if (root.key <target ){
+       if (root.right==null){
+          return root.key;
+       }
+       ans = closest(root.right,target);
+       return Math.abs(root.key - target) > Math.abs(ans - target)? ans : root.key;
+    }
+    if (root.key >target ){
+       if (root.left==null){
+          return root.key;
+       }
+       ans = closest(root.left,target);
+       return Math.abs(root.key - target) > Math.abs(ans - target)? ans : root.key;
+    }
+    return root.key;
+  }
+  
+  public int[] closestKValues(TreeNode root, double target, int k) {
+    // Write your solution here
+    int[] ans = new int[k];
+    int i,temp,j,m,t;
+    for (i = 0;i<k;i++){
+       temp = closest(root,target);
+       ans[i] = temp;
+       for (j=i-1;j>=0;j--){
+         if (ans[j+1]<ans[j]){
+            t = ans[j];
+            ans[j] =ans[j+1];
+            ans[j+1] = t;
+         }
+       }
+       root = deleteTree(root,temp);
+       if (root == null) {
+         i++;
+         break;
+       }
+    }
+    
+    int[] a = new int[i];
+    for (m=0;m<i;m++){
+        a[m] = ans[m];
+    }
+    return a;
+  }
+}

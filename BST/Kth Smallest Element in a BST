@@ -1,0 +1,42 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+
+
+public class Solution {
+  static int P,Num;
+  
+  static public void Inorder(TreeNode root, int k){
+    
+     if (root ==null){
+        return;
+     }
+    
+     if (Num>k){ 
+        return;
+     } 
+     
+     Inorder(root.left,k);
+     if (Num<=k){ 
+        P = root.key;
+        Num++;
+     } 
+     Inorder(root.right,k);
+  }
+  
+  public int kthSmallest(TreeNode root, int k) {
+    // Write your solution here
+    Num = 1;
+    P = root.key;
+    Inorder(root,k);
+    return P;
+    
+  }
+}

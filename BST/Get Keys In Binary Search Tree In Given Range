@@ -1,0 +1,29 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+  public List<Integer> getRange(TreeNode root, int min, int max) {
+    // Write your solution here
+    ArrayList<Integer> ans = new ArrayList<Integer>();
+    if (root == null){
+       return ans;
+    }    
+    if (root.left != null && root.key>min) {
+      ans.addAll(getRange(root.left,min,max));
+    }
+    if (root.key<=max && root.key>=min){
+      ans.add(root.key);
+    }  
+    if(root.right != null && root.key<max){
+      ans.addAll(getRange(root.right,min,max));
+    }
+    return ans;
+  }
+}

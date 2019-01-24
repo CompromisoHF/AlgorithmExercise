@@ -1,0 +1,51 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+  ArrayList<TreeNode> a = new ArrayList<TreeNode>();
+  ArrayList<TreeNode> b = new ArrayList<TreeNode>();
+  
+  public void search( TreeNode root,int aim,int index){
+    if (root==null){
+      return;
+    } else{
+    if (root.key>aim){
+      if (index == 0) {a.add(root);}
+      else {b.add(root);}
+      search(root.left,aim,index);     
+    } 
+    if (root.key<aim){
+      if (index == 0) a.add(root);
+      else b.add(root);
+      search(root.right,aim,index);
+    }
+    if (root.key == aim){
+      if (index == 0) a.add(root);
+      else b.add(root);      
+      return;
+    }
+    }
+  } 
+  
+  public TreeNode lca(TreeNode root, int p, int q) {
+    int i,j;
+    // Write your solution here
+    search(root,p,0);
+    search(root,q,1);
+    for (i = a.size()-1;i>=0;i--){
+        for (j = b.size()-1;j>=0;j--){
+           if (a.get(i)== b.get(j)){
+               return ((TreeNode)a.get(i));
+           }
+        }
+    }
+    return null;
+  }
+}

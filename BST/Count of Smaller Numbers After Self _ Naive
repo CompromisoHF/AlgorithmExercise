@@ -1,0 +1,17 @@
+public class Solution {
+  public List<Integer> countSmaller(int[] nums) {
+    // Write your solution here
+    int i,j,sum;
+    ArrayList<Integer> count = new ArrayList<Integer>();
+    
+    for (i=0;i<nums.length;i++){
+       sum =0;
+       for (j=i+1;j<nums.length;j++){
+          if (nums[j]<nums[i]) sum++;
+       }
+       count.add(sum);
+    }
+    
+    return count;
+  }
+}

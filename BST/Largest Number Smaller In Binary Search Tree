@@ -1,0 +1,28 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+  public int largestSmaller(TreeNode root, int target) {
+    int ans;
+    // Write your solution here
+    if (root == null){
+       return Integer.MIN_VALUE;
+    }
+    
+    if (root.key < target){
+       ans = largestSmaller(root.right,target);
+       return ans == Integer.MIN_VALUE ? root.key: ans;
+    }
+    if (root.key >= target){
+       return largestSmaller(root.left,target);
+    }
+    return Integer.MIN_VALUE;
+  }
+}

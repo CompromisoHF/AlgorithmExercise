@@ -1,0 +1,59 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+   
+  public TreeNode deleteTree(TreeNode root, int key) {
+    // Write your solution here
+    TreeNode p = new TreeNode(0);
+    TreeNode q = new TreeNode(0);    
+    
+    if (root == null) {
+       return null;
+    }
+    
+    if (root.key > key){
+      root.left = deleteTree(root.left,key);
+      return root;
+    }
+    if (root.key < key){
+      root.right = deleteTree(root.right,key);
+      return root;
+    }    
+    
+    if (root.left == null){
+      root = root.right;
+      return root;
+    }    
+    
+    if (root.right == null){
+      root = root.left;
+      return root;
+    }
+    
+    p = root.right;
+    
+    if (p.left==null){
+      p.left = root.left;
+      root = p;
+      return root;
+    }
+    
+    while (p.left.left != null){
+       p = p.left;
+    }    
+    q = p.left;
+    p.left = p.left.right; 
+    q.right = root.right;
+    q.left = root.left;
+    root = q;
+    return root;
+  }
+}

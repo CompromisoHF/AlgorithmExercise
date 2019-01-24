@@ -1,0 +1,34 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+  public boolean isBST(TreeNode root) {
+    // Write your solution here
+    if (root==null){
+      return true;    
+    }
+    TreeNode child = new TreeNode(0);
+    int LeftMax = Integer.MIN_VALUE, RightMin =Integer.MAX_VALUE; 
+    child = root.left;
+    while (child !=null) {
+      LeftMax = child.key;
+      child = child.right;
+    }
+    child = root.right;
+    while (child !=null) {
+      RightMin = child.key;
+      child = child.left;
+    }
+    if (RightMin>root.key && LeftMax<root.key){
+      return(isBST(root.left)&&isBST(root.right));
+    }
+    return false;
+  }
+}

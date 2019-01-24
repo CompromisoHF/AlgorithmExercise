@@ -1,0 +1,28 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+  public TreeNode insert(TreeNode root, int key) {
+    // Write your solution here
+    if (root == null) {
+      TreeNode AimVetrex = new TreeNode(key);
+      return AimVetrex;
+    }
+    if (key == root.key){
+      return root;
+    }
+    if (key < root.key){
+      root.left = insert(root.left,key);
+    } else {
+      root.right = insert(root.right,key);
+    }    
+    return root;
+  }
+}

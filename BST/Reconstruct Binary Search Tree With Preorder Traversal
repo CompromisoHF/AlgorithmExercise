@@ -1,0 +1,41 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+  int k;
+  
+  TreeNode startcst(int max,int min,int[] preorder){
+      
+       if (k == preorder.length){
+        return null;
+      } 
+
+     
+      if (k<preorder.length){
+        if(preorder[k]<min || preorder[k]> max){
+           return null;
+        }
+        TreeNode root = new TreeNode(preorder[k]);
+        k++;
+        root.left = startcst(root.key,min,preorder);
+        root.right = startcst(max,root.key,preorder);
+        return root;
+     }
+      return null;
+  }
+  
+  public TreeNode reconstruct(int[] pre) {
+    // Write your solution here
+    TreeNode root = new TreeNode(0);
+    k = 0;
+    root = startcst(Integer.MAX_VALUE,Integer.MIN_VALUE,pre);    
+    return root;
+  }
+}

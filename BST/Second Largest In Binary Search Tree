@@ -1,0 +1,38 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+  public int secondLargest(TreeNode root) {
+    // Write your solution here
+    TreeNode p = new TreeNode(0);
+    p = root;
+    
+    if (p.right == null){
+       p = p.left;
+    } else{
+    
+       while (p.right.right != null){
+         p = p.right;
+       }
+       if (p.right.left == null){
+          return p.key;
+       }
+       p = p.right.left;
+    }
+    if (p == null){
+       return Integer.MIN_VALUE;
+    }else{
+      while (p.right != null){
+         p = p.right;
+      }
+    }
+    return p.key;
+  }
+}

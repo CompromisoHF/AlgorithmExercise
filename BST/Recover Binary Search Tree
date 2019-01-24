@@ -1,0 +1,44 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+  TreeNode p;
+  TreeNode first;
+  TreeNode second;
+  
+  void Inorder(TreeNode root){
+    if (root == null){
+      return;
+    }
+    
+    Inorder (root.left);
+    if (p==null) {
+      p = root;
+    } else if (p.key>root.key) {
+       if( first == null){
+         first = p;
+       }
+       second = root;
+    } 
+    p = root;   
+    Inorder (root.right);
+  }
+  
+  public TreeNode recover(TreeNode root) {
+    // Write your solution here
+    int t;
+    Inorder (root);
+    t = first.key;
+    first.key = second.key;
+    second.key = t;
+   // System.out.println(ab1+","+ab2);       
+    return root;
+  }
+}

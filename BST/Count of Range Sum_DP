@@ -1,0 +1,28 @@
+public class Solution {
+  
+  public int countRangeSum(int[] nums, int lower, int upper) {
+    // Write your solution here
+    int[] dp = new int[nums.length];
+    int[] sum = new int[nums.length];
+    int i,j;
+    
+    if (nums.length == 0 ||nums == null){
+       return 0;
+    }
+    sum[0] = nums[0];
+    if (sum[0]>=lower && sum[0]<=upper){
+      dp[0]++;
+    }
+    
+    for(i = 1;i<nums.length;i++){
+       sum[i] = sum[i-1] +nums[i];
+       dp[i] = dp[i-1];
+       if (sum[i]>=lower && sum[i]<=upper) dp[i]++;
+       for (j = 0;j < i;j++){
+          if ((sum[i]-sum[j])>=lower && (sum[i]-sum[j])<=upper) dp[i]++;
+       }
+    }
+    
+    return dp[nums.length-1];
+  }
+}

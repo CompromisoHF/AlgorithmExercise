@@ -1,0 +1,29 @@
+/**
+ * public class TreeNode {
+ *   public int key;
+ *   public TreeNode left;
+ *   public TreeNode right;
+ *   public TreeNode(int key) {
+ *     this.key = key;
+ *   }
+ * }
+ */
+public class Solution {
+  int sum = 0;
+  
+  public void Inorder(TreeNode root){
+    if (root == null){
+       return;    
+    }
+    Inorder(root.right);
+    sum = sum + root.key;
+    root.key = sum - root.key;
+    Inorder(root.left);
+  }
+  
+  public TreeNode greaterSum(TreeNode root) {
+    // Write your solution here
+    Inorder(root);
+    return root;
+  }
+}

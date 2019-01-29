@@ -1,0 +1,39 @@
+public class Solution {
+  
+  private boolean isvalid(String str1,String str2){
+     boolean[] marker = new boolean[26];
+     int index,i;
+     char chr;
+    
+     for (i = 0; i<str1.length();i++){
+        chr = str1.charAt(i);
+        index = (int)chr - (int)'a';
+        marker[index] = true;
+     }
+     for (i = 0; i<str2.length();i++){
+        chr = str2.charAt(i);
+        index = (int)chr - (int)'a';    
+        if (marker[index]) return false;
+     }
+     return true;
+  }
+    
+  public int largestProduct(String[] dict) {
+    // Write your solution here
+    int len = dict.length;
+    int templen = 0;
+    int maxprod = 0;
+    int j,test=0;
+    for (int i = 0;i<len;i++){
+       for ( j = (i+1);j<len;j++){
+           if (isvalid(dict[i],dict[j])){
+            //  test++;
+              templen = dict[i].length() * dict[j].length();
+              if (templen>maxprod) maxprod = templen;
+           }
+       }    
+    }
+   
+    return maxprod;
+  }
+}
